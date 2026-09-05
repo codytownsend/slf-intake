@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Inquiry · Simple Little Flowers</title>
+  <meta name="description" content="Tell us about your wedding or event. Simple Little Flowers grows and designs seasonal florals in Northwest Arkansas.">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Tell us about your event · Simple Little Flowers">
+  <meta property="og:description" content="A seasonal flower farm in Northwest Arkansas. Share your event details and we'll reply within 3–5 business days.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <!-- ============ Masthead + screening copy ============ -->
+    <header class="masthead">
+      <p class="masthead__eyebrow">Simple Little Flowers · Northwest Arkansas</p>
+      <h1 class="masthead__title">Tell us about your event</h1>
+      <p class="masthead__intro">This is an inquiry, not a booking. We grow and design around what's in season on the farm, so every event looks a little different. Share the details below and we'll reply within <strong>3&ndash;5 business days</strong>.</p>
+    </header>
+
+    <section class="notes" aria-label="Before you begin">
+      <!-- EDIT: set your real starting minimum here -->
+      <div class="note">
+        <span class="note__label">Where we start</span>
+        <p>We take on a limited number of events each season. Full wedding florals typically begin around <strong>$X,XXX</strong> <span class="opt">(set your minimum)</span> so we can grow and design well for you.</p>
+      </div>
+      <div class="note">
+        <span class="note__label">Delivery &amp; pickup</span>
+        <p>We deliver throughout <strong>Northwest Arkansas</strong>, and farm pickup is available. Tell us your venue and we'll confirm we can reach it.</p>
+      </div>
+
+      <details class="note notes__wide">
+        <summary>
+          <span class="note__label">What's blooming, and when</span>
+        </summary>
+        <div class="season">
+          <p class="field__help" style="margin-top:0">We design with the season. This is a rough guide for our Northwest Arkansas fields &mdash; a warm or cold year shifts everything by a few weeks, so treat it as a starting point, not a promise.</p>
+          <p class="season__row"><b>Early spring</b> Tulips, daffodils, ranunculus, anemones, hyacinth, flowering branches</p>
+          <p class="season__row"><b>Late spring</b> Peonies, sweet peas, lilac, snapdragons, foxglove, bearded iris</p>
+          <p class="season__row"><b>Summer</b> Dahlias, zinnias, cosmos, celosia, sunflowers, rudbeckia, grasses</p>
+          <p class="season__row"><b>Early fall</b> Dahlias at their peak, chrysanthemums, amaranth, marigold, seed pods</p>
+          <p class="season__row"><b>Late fall / winter</b> Dried florals, evergreens, and a limited selection of sourced blooms</p>
+          <p class="field__help" style="margin-top:var(--space-2)">Hoping for peonies in September or dahlias in April? Let us know in the design section and we'll talk honestly about substitutes.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============ Progress ============ -->
+    <div class="progress" aria-hidden="false">
+      <div class="progress__meta">
+        <span>Step <b id="stepNum">1</b> of 5</span>
+        <span class="progress__label" id="stepName">Your details</span>
+      </div>
+      <div class="progress__track">
+        <div class="progress__bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <!-- ============ Form ============ -->
+    <div class="card">
+      <div class="form-alert" id="formAlert" role="alert" tabindex="-1"></div>
+
+      <form id="inquiryForm" novalidate>
+        <!-- honeypot -->
+        <div class="hp" aria-hidden="true">
+          <label for="hp_field">Leave this field empty</label>
+          <input type="text" id="hp_field" name="hp_field" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="submitted_at" id="submitted_at">
+        <input type="hidden" name="utm_source" id="utm_source">
+
+        <!-- ========== STEP 1 — Contact ========== -->
+        <section class="step" data-step="1" data-name="Your details" data-active aria-labelledby="s1-title">
+          <p class="step__kicker">Contact</p>
+          <h2 class="step__title" id="s1-title">Let's start with you</h2>
+          <p class="step__note">So we know who we're talking to and how to reach you back.</p>
+
+          <div class="row row--2">
+            <div class="field">
+              <label class="field__label" for="first_name">First name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="first_name" name="first_name" autocomplete="given-name" required aria-describedby="first_name-err">
+              <p class="field__error" id="first_name-err">Please enter your first name.</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="last_name">Last name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="last_name" name="last_name" autocomplete="family-name" required aria-describedby="last_name-err">
+              <p class="field__error" id="last_name-err">Please enter your last name.</p>
+            </div>
+          </div>
+
+          <div class="row row--2">
+            <div class="field">
+              <label class="field__label" for="email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="email-err">
+              <p class="field__error" id="email-err">Enter a valid email, e.g. name@example.com.</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="phone">Phone <span class="opt">(optional)</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel">
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">Preferred contact method <span class="opt">(optional)</span></legend>
+            <div class="choices choices--inline">
+              <label class="choice"><input type="radio" name="contact_pref" value="Email"><span class="choice__text"><span class="choice__title">Email</span></span></label>
+              <label class="choice"><input type="radio" name="contact_pref" value="Phone"><span class="choice__text"><span class="choice__title">Phone</span></span></label>
+              <label class="choice"><input type="radio" name="contact_pref" value="Text"><span class="choice__text"><span class="choice__title">Text</span></span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label class="field__label" for="partner_name">Partner's name <span class="opt">(if applicable)</span></label>
+            <input type="text" id="partner_name" name="partner_name" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="referral_source">How did you hear about us? <span class="opt">(optional)</span></label>
+            <select id="referral_source" name="referral_source">
+              <option value="">Choose one…</option>
+              <option>Instagram</option>
+              <option>Google search</option>
+              <option>Wedding venue</option>
+              <option>Planner or florist referral</option>
+              <option>Past client</option>
+              <option>Farmers market</option>
+              <option>Word of mouth</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- ========== STEP 2 — Event basics ========== -->
+        <section class="step" data-step="2" data-name="The event" aria-labelledby="s2-title" hidden>
+          <p class="step__kicker">The event</p>
+          <h2 class="step__title" id="s2-title">The basics</h2>
+          <p class="step__note">Just enough to see whether we're a fit and picture the day.</p>
+
+          <div class="field">
+            <label class="field__label" for="event_type">Event type <span class="req" aria-hidden="true">*</span></label>
+            <select id="event_type" name="event_type" required aria-describedby="event_type-err" data-controls="event_type_other_wrap" data-reveal-value="Other">
+              <option value="">Choose one…</option>
+              <option>Wedding</option>
+              <option>Engagement party</option>
+              <option>Rehearsal dinner</option>
+              <option>Shower</option>
+              <option>Corporate event</option>
+              <option>Celebration of life</option>
+              <option>Birthday or anniversary</option>
+              <option>Other</option>
+            </select>
+            <p class="field__error" id="event_type-err">Please choose an event type.</p>
+          </div>
+
+          <div class="field" data-reveal id="event_type_other_wrap">
+            <label class="field__label" for="event_type_other">Tell us what kind of event</label>
+            <input type="text" id="event_type_other" name="event_type_other">
+          </div>
+
+          <div class="row row--2">
+            <div class="field">
+              <label class="field__label" for="event_date">Event date <span class="req" aria-hidden="true">*</span></label>
+              <input type="date" id="event_date" name="event_date" required aria-describedby="event_date-err">
+              <p class="field__error" id="event_date-err">Please choose a date that isn't in the past.</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="event_time">Start time <span class="opt">(optional)</span></label>
+              <input type="time" id="event_time" name="event_time">
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">Is the date set? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices" aria-describedby="date_status-err" role="radiogroup">
+              <label class="choice"><input type="radio" name="date_status" value="Locked in" required data-hide="alt_dates_wrap"><span class="choice__text"><span class="choice__title">Locked in</span></span></label>
+              <label class="choice"><input type="radio" name="date_status" value="Narrowed to a few options" data-show="alt_dates_wrap"><span class="choice__text"><span class="choice__title">Narrowed to a few options</span></span></label>
+              <label class="choice"><input type="radio" name="date_status" value="Fully flexible" data-show="alt_dates_wrap"><span class="choice__text"><span class="choice__title">Fully flexible</span></span></label>
+            </div>
+            <p class="field__error" id="date_status-err">Please let us know how firm the date is.</p>
+          </fieldset>
+
+          <div class="field" data-reveal id="alt_dates_wrap">
+            <label class="field__label" for="alt_dates">Alternate dates you're considering</label>
+            <input type="text" id="alt_dates" name="alt_dates" placeholder="e.g. any Saturday in late May, or May 17 / June 7">
+          </div>
+
+          <div class="row row--2">
+            <div class="field">
+              <label class="field__label" for="guest_count">Guest count <span class="req" aria-hidden="true">*</span></label>
+              <select id="guest_count" name="guest_count" required aria-describedby="guest_count-err">
+                <option value="">Choose a range…</option>
+                <option>Under 25</option>
+                <option>25 to 50</option>
+                <option>51 to 100</option>
+                <option>101 to 150</option>
+                <option>151 to 200</option>
+                <option>200+</option>
+              </select>
+              <p class="field__error" id="guest_count-err">Please choose a guest range.</p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="table_count">Tables needing flowers <span class="opt">(optional)</span></label>
+              <input type="number" id="table_count" name="table_count" min="0" inputmode="numeric" placeholder="e.g. 12">
+              <p class="field__help">An estimate is completely fine.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== STEP 3 — Venue & service ========== -->
+        <section class="step" data-step="3" data-name="Venue & service" aria-labelledby="s3-title" hidden>
+          <p class="step__kicker">Venue &amp; service</p>
+          <h2 class="step__title" id="s3-title">Where &amp; how</h2>
+          <p class="step__note">We supply flowers for events held at your venue &mdash; delivered, or picked up here at the farm.</p>
+
+          <div class="field">
+            <label class="field__label" for="venue_name">Venue name <span class="opt">(optional)</span></label>
+            <input type="text" id="venue_name" name="venue_name" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="venue_location">Venue city &amp; state <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="venue_location" name="venue_location" placeholder="e.g. Fayetteville, AR" autocomplete="off" required aria-describedby="venue_location-err venue_location-help">
+            <p class="field__help" id="venue_location-help">Even a best guess helps us check delivery.</p>
+            <p class="field__error" id="venue_location-err">Please tell us roughly where the event is.</p>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">Have you booked the venue? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices" role="radiogroup">
+              <label class="choice"><input type="radio" name="venue_booked" value="Booked" required><span class="choice__text"><span class="choice__title">Booked</span></span></label>
+              <label class="choice"><input type="radio" name="venue_booked" value="Touring venues"><span class="choice__text"><span class="choice__title">Still touring venues</span></span></label>
+              <label class="choice"><input type="radio" name="venue_booked" value="Not started"><span class="choice__text"><span class="choice__title">Haven't started looking</span></span></label>
+            </div>
+            <p class="field__error" id="venue_booked-err">Please choose one.</p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field__label">Delivery &amp; setup <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices" role="radiogroup">
+              <label class="choice"><input type="radio" name="delivery_needed" value="Full delivery, setup, and teardown" required><span class="choice__text"><span class="choice__title">Full delivery, setup &amp; teardown</span><span class="choice__desc">We handle everything on site.</span></span></label>
+              <label class="choice"><input type="radio" name="delivery_needed" value="Delivery and drop-off only"><span class="choice__text"><span class="choice__title">Delivery &amp; drop-off only</span><span class="choice__desc">We deliver; your team places everything.</span></span></label>
+              <label class="choice"><input type="radio" name="delivery_needed" value="Pick up at the farm"><span class="choice__text"><span class="choice__title">We'll pick up at the farm</span></span></label>
+              <label class="choice"><input type="radio" name="delivery_needed" value="Not sure"><span class="choice__text"><span class="choice__title">Not sure yet</span></span></label>
+            </div>
+            <p class="field__error" id="delivery_needed-err">Please choose one.</p>
+          </fieldset>
+
+          <div class="field">
+            <label class="field__label" for="venue_restrictions">Venue access or timing notes <span class="opt">(optional)</span></label>
+            <textarea id="venue_restrictions" name="venue_restrictions" aria-describedby="venue_restrictions-help"></textarea>
+            <p class="field__help" id="venue_restrictions-help">Load-in windows, teardown deadlines, stairs, elevators, parking &mdash; anything that shapes the day.</p>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">Level of service <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices" role="radiogroup">
+              <label class="choice"><input type="radio" name="service_level" value="DIY buckets" required><span class="choice__text"><span class="choice__title">DIY buckets</span><span class="choice__desc">Bulk stems by the bucket &mdash; you or your team arrange them.</span></span></label>
+              <label class="choice"><input type="radio" name="service_level" value="A la carte designed pieces"><span class="choice__text"><span class="choice__title">À la carte designed pieces</span><span class="choice__desc">We arrange specific items; you place them.</span></span></label>
+              <label class="choice"><input type="radio" name="service_level" value="Full-service design"><span class="choice__text"><span class="choice__title">Full-service design</span><span class="choice__desc">We design, deliver, install, and return for teardown.</span></span></label>
+              <label class="choice"><input type="radio" name="service_level" value="Not sure, help me decide"><span class="choice__text"><span class="choice__title">Not sure &mdash; help me decide</span></span></label>
+            </div>
+            <p class="field__error" id="service_level-err">Please choose a level of service.</p>
+          </fieldset>
+        </section>
+
+        <!-- ========== STEP 4 — Flowers & style ========== -->
+        <section class="step" data-step="4" data-name="Flowers & style" aria-labelledby="s4-title" hidden>
+          <p class="step__kicker">Flowers &amp; style</p>
+          <h2 class="step__title" id="s4-title">What you have in mind</h2>
+          <p class="step__note">Check what you think you'll need &mdash; rough is fine &mdash; and tell us how you want it to feel.</p>
+
+          <fieldset class="field" id="items_fieldset">
+            <legend class="field__label">What do you need? <span class="req" aria-hidden="true">*</span></legend>
+            <p class="field__help" style="margin-top:0;margin-bottom:var(--space-3)">Check any that apply. A quantity box appears for each &mdash; estimates welcome.</p>
+            <div class="choices" id="itemsList" aria-describedby="items-err"></div>
+            <p class="field__error" id="items-err">Please choose at least one item, or add a note below.</p>
+          </fieldset>
+
+          <div class="field">
+            <label class="field__label" for="items_other">Anything else you need <span class="opt">(optional)</span></label>
+            <textarea id="items_other" name="items_other" placeholder="Anything not listed above."></textarea>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="color_palette">Color palette <span class="opt">(optional)</span></label>
+            <textarea id="color_palette" name="color_palette" aria-describedby="palette-help" style="min-height:90px"></textarea>
+            <p class="field__help" id="palette-help">Describe it, or name the two or three colors that matter most.</p>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">Overall style <span class="opt">(optional)</span></legend>
+            <div class="choices choices--inline">
+              <!-- populated to keep markup light -->
+              <label class="choice"><input type="checkbox" name="style" value="Wild & garden-gathered"><span class="choice__text"><span class="choice__title">Wild &amp; garden-gathered</span></span></label>
+              <label class="choice"><input type="checkbox" name="style" value="Loose & romantic"><span class="choice__text"><span class="choice__title">Loose &amp; romantic</span></span></label>
+              <label class="choice"><input type="checkbox" name="style" value="Structured & classic"><span class="choice__text"><span class="choice__title">Structured &amp; classic</span></span></label>
+              <label class="choice"><input type="checkbox" name="style" value="Modern & minimal"><span class="choice__text"><span class="choice__title">Modern &amp; minimal</span></span></label>
+              <label class="choice"><input type="checkbox" name="style" value="Bold & colorful"><span class="choice__text"><span class="choice__title">Bold &amp; colorful</span></span></label>
+              <label class="choice"><input type="checkbox" name="style" value="Soft & neutral"><span class="choice__text"><span class="choice__title">Soft &amp; neutral</span></span></label>
+              <label class="choice"><input type="checkbox" name="style" value="Moody & dark"><span class="choice__text"><span class="choice__title">Moody &amp; dark</span></span></label>
+              <label class="choice"><input type="checkbox" name="style" value="Cottage / wildflower"><span class="choice__text"><span class="choice__title">Cottage / wildflower</span></span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label class="field__label" for="inspiration_links">Inspiration links <span class="opt">(optional)</span></label>
+            <textarea id="inspiration_links" name="inspiration_links" aria-describedby="insp-help" style="min-height:80px" placeholder="Paste any links here."></textarea>
+            <p class="field__help" id="insp-help">A Pinterest board, Instagram saves, or anything else that captures the look.</p>
+          </div>
+
+          <div class="row row--2">
+            <div class="field">
+              <label class="field__label" for="must_haves">Must-have flowers <span class="opt">(optional)</span></label>
+              <input type="text" id="must_haves" name="must_haves">
+            </div>
+            <div class="field">
+              <label class="field__label" for="avoid">Flowers to avoid <span class="opt">(optional)</span></label>
+              <input type="text" id="avoid" name="avoid" aria-describedby="avoid-help">
+              <p class="field__help" id="avoid-help">Include any allergies here too.</p>
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">Open to seasonal substitutions? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices" role="radiogroup">
+              <label class="choice"><input type="radio" name="substitutions" value="Yes, I trust your seasonal picks" required><span class="choice__text"><span class="choice__title">Yes &mdash; I trust your seasonal picks</span></span></label>
+              <label class="choice"><input type="radio" name="substitutions" value="Mostly, with a few must-haves"><span class="choice__text"><span class="choice__title">Mostly, with a few must-haves</span></span></label>
+              <label class="choice"><input type="radio" name="substitutions" value="No, I need specific varieties"><span class="choice__text"><span class="choice__title">No &mdash; I need specific varieties</span></span></label>
+            </div>
+            <p class="field__error" id="substitutions-err">Please choose one &mdash; it helps us know if we're a fit.</p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field__label">Drawn to locally grown, in-season flowers? <span class="opt">(optional)</span></legend>
+            <div class="choices choices--inline">
+              <label class="choice"><input type="radio" name="local_focus" value="Yes, that's why I'm here"><span class="choice__text"><span class="choice__title">Yes, that's the draw</span></span></label>
+              <label class="choice"><input type="radio" name="local_focus" value="Nice but not essential"><span class="choice__text"><span class="choice__title">Nice, not essential</span></span></label>
+              <label class="choice"><input type="radio" name="local_focus" value="No preference"><span class="choice__text"><span class="choice__title">No preference</span></span></label>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- ========== STEP 5 — Budget & details ========== -->
+        <section class="step" data-step="5" data-name="Budget & details" aria-labelledby="s5-title" hidden>
+          <p class="step__kicker">Budget &amp; details</p>
+          <h2 class="step__title" id="s5-title">The practical part</h2>
+          <p class="step__note">This helps us recommend a realistic scope. We work with a range of budgets and would rather point you somewhere useful than guess.</p>
+
+          <fieldset class="field">
+            <legend class="field__label">Floral budget range <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices" role="radiogroup">
+              <label class="choice"><input type="radio" name="budget" value="Under $500" required><span class="choice__text"><span class="choice__title">Under $500</span></span></label>
+              <label class="choice"><input type="radio" name="budget" value="$500 to $1,000"><span class="choice__text"><span class="choice__title">$500 &ndash; $1,000</span></span></label>
+              <label class="choice"><input type="radio" name="budget" value="$1,000 to $2,500"><span class="choice__text"><span class="choice__title">$1,000 &ndash; $2,500</span></span></label>
+              <label class="choice"><input type="radio" name="budget" value="$2,500 to $5,000"><span class="choice__text"><span class="choice__title">$2,500 &ndash; $5,000</span></span></label>
+              <label class="choice"><input type="radio" name="budget" value="$5,000 to $10,000"><span class="choice__text"><span class="choice__title">$5,000 &ndash; $10,000</span></span></label>
+              <label class="choice"><input type="radio" name="budget" value="$10,000+"><span class="choice__text"><span class="choice__title">$10,000+</span></span></label>
+              <label class="choice"><input type="radio" name="budget" value="Not sure, I'd like guidance"><span class="choice__text"><span class="choice__title">Not sure &mdash; I'd like guidance</span></span></label>
+            </div>
+            <p class="field__error" id="budget-err">Please choose a range &mdash; even a rough one helps.</p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field__label">How firm is that budget? <span class="opt">(optional)</span></legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="budget_flex" value="Firm ceiling"><span class="choice__text"><span class="choice__title">Firm ceiling</span></span></label>
+              <label class="choice"><input type="radio" name="budget_flex" value="Some flexibility for the right design"><span class="choice__text"><span class="choice__title">Some flexibility for the right design</span></span></label>
+              <label class="choice"><input type="radio" name="budget_flex" value="Still figuring it out"><span class="choice__text"><span class="choice__title">Still figuring it out</span></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field__label">Working with a planner or coordinator? <span class="opt">(optional)</span></legend>
+            <div class="choices choices--inline">
+              <label class="choice"><input type="radio" name="has_planner" value="Yes" data-show="planner_contact_wrap"><span class="choice__text"><span class="choice__title">Yes</span></span></label>
+              <label class="choice"><input type="radio" name="has_planner" value="No" data-hide="planner_contact_wrap"><span class="choice__text"><span class="choice__title">No</span></span></label>
+              <label class="choice"><input type="radio" name="has_planner" value="Still looking" data-hide="planner_contact_wrap"><span class="choice__text"><span class="choice__title">Still looking</span></span></label>
+            </div>
+          </fieldset>
+
+          <div class="field" data-reveal id="planner_contact_wrap">
+            <label class="field__label" for="planner_contact">Planner name &amp; contact</label>
+            <input type="text" id="planner_contact" name="planner_contact">
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">Other vendors already booked <span class="opt">(optional)</span></legend>
+            <div class="choices choices--inline">
+              <label class="choice"><input type="checkbox" name="other_vendors_booked" value="Photographer"><span class="choice__text"><span class="choice__title">Photographer</span></span></label>
+              <label class="choice"><input type="checkbox" name="other_vendors_booked" value="Caterer"><span class="choice__text"><span class="choice__title">Caterer</span></span></label>
+              <label class="choice"><input type="checkbox" name="other_vendors_booked" value="Venue"><span class="choice__text"><span class="choice__title">Venue</span></span></label>
+              <label class="choice"><input type="checkbox" name="other_vendors_booked" value="Rentals"><span class="choice__text"><span class="choice__title">Rentals</span></span></label>
+              <label class="choice"><input type="checkbox" name="other_vendors_booked" value="None yet"><span class="choice__text"><span class="choice__title">None yet</span></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="field__label">Where are you in planning? <span class="opt">(optional)</span></legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="planning_stage" value="Just starting"><span class="choice__text"><span class="choice__title">Just starting</span></span></label>
+              <label class="choice"><input type="radio" name="planning_stage" value="Actively booking vendors"><span class="choice__text"><span class="choice__title">Actively booking vendors</span></span></label>
+              <label class="choice"><input type="radio" name="planning_stage" value="Almost everything booked"><span class="choice__text"><span class="choice__title">Almost everything booked</span></span></label>
+              <label class="choice"><input type="radio" name="planning_stage" value="Last-minute"><span class="choice__text"><span class="choice__title">Last-minute</span></span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label class="field__label" for="notes">Anything else we should know? <span class="opt">(optional)</span></label>
+            <textarea id="notes" name="notes"></textarea>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__label">A couple of last things</legend>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="newsletter" value="Yes"><span class="choice__text"><span class="choice__title">Send me farm updates &amp; seasonal availability</span></span></label>
+              <label class="choice"><input type="checkbox" name="photo_permission" value="Yes"><span class="choice__text"><span class="choice__title">You may photograph our work for your portfolio &amp; social media</span></span></label>
+              <label class="choice"><input type="checkbox" name="ack_inquiry" value="Yes" required aria-describedby="ack-err"><span class="choice__text"><span class="choice__title">I understand this is an inquiry and doesn't reserve a date <span class="req" aria-hidden="true">*</span></span></span></label>
+            </div>
+            <p class="field__error" id="ack-err">Please confirm you understand this is an inquiry.</p>
+          </fieldset>
+        </section>
+
+        <!-- ========== Actions ========== -->
+        <div class="actions">
+          <button type="button" class="btn btn--ghost" id="backBtn" hidden>← Back</button>
+          <button type="button" class="btn btn--primary btn--next" id="nextBtn">Continue →</button>
+          <button type="submit" class="btn btn--primary btn--next" id="submitBtn" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <span class="btn__label">Send inquiry</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- ========== Success ========== -->
+      <div class="done" id="done" role="status" aria-live="polite">
+        <div class="done__mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h2 class="done__title">Thank you &mdash; it's in our hands</h2>
+        <p class="done__text">We read every inquiry ourselves and we'll be in touch within <strong>3&ndash;5 business days</strong>. Keep an eye on your inbox &mdash; a confirmation is on its way. In the meantime, come see what's blooming.</p>
+        <div class="done__links">
+          <!-- EDIT these links -->
+          <a class="btn btn--primary" href="https://instagram.com/" target="_blank" rel="noopener">See our Instagram</a>
+          <a class="btn btn--ghost" href="/" >Back to the farm</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="colophon">Simple Little Flowers · Northwest Arkansas · <a href="mailto:hello@simplelittleflowers.com">hello@simplelittleflowers.com</a></p>
+  </main>
+
+  <script src="form.js" defer></script>
+</body>
+</html>

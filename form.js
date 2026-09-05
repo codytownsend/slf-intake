@@ -20,11 +20,7 @@
     'Head table or sweetheart garland',
     'Cocktail or accent table arrangements',
     'Bar, welcome sign, or guestbook florals',
-    'Cake flowers',
-    'Bud vases',
-    'Loose petals',
-    'Bulk buckets for DIY',
-    'Potted plants or living decor'
+    'Bud vases'
   ];
   var itemsList = document.getElementById('itemsList');
   ITEMS.forEach(function (label, i) {
